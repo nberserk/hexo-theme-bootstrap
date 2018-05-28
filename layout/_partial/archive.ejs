@@ -1,33 +1,54 @@
-<% if (pagination == 2){ %>
-  <% page.posts.each(function(post){ %>
-    <%- partial('article', {post: post, index: true}) %>
-  <% }) %>
+<div class="container">
+  <% var years = _.uniq(site.posts.sort('date', -1).map(p => p.date.year())) %>
+  <% years.forEach(function (year) { %>
+
+    <a href="<%= config.root + config.archive_dir + "/" + year %>" class="btn btn-default" >
+      <%= year %>
+    </a>
+
+  <% }); %>
+</div>
+
+<hr>
+
+<% var archives = site.posts.reduce((acc, p) => { %>
+  <% var year = p.date.year() %>
+  <% if (!acc[year]) acc[year] = [p]; else acc[year].push(p); %>
+  <% return acc; %>
+<% }, {}) %>
+
+<% if (page.year) { %>
+  <ul>
+    <% archives[page.year].sort((a,b) => b.date - a.date).forEach(post => { %>
+      <li class="listing-item">
+        <p class="post-title">
+          <small class="post-meta">
+            <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, null) %></time>
+          </small>
+          <a href="<%- config.root %><%- post.path %>"><%- post.title %></a>
+        </p>
+      </li>
+    <% }) %>
+  </ul>
 <% } else { %>
-  <% var last; %>
-  <% page.posts.each(function(post, i){ %>
-    <% var year = post.date.year(); %>
-    <% if (last != year){ %>
-      <% if (last != null){ %>
-        </div></section>
-      <% } %>
-      <% last = year; %>
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="<%- url_for(config.archive_dir + '/' + year) %>" class="archive-year"><%= year %></a>
-        </div>
-        <div class="archives">
-    <% } %>
-    <%- partial('archive-post', {post: post, even: i % 2 == 0}) %>
+  <% Object.keys(archives).sort((a,b) => b - a).forEach(year => { %>
+
+    <div class="container">
+      <a class="btn btn-default" data-toggle="collapse" data-target="#<%= year %>">
+        <%= year %>&nbsp; <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+      <ul id="<%= year %>" class="in">
+        <% archives[year].sort((a,b) => b.date - a.date).forEach(post => { %>
+          <li class="listing-item">
+            <p class="post-title">
+              <small class="post-meta">
+                <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, null) %></time>
+              </small>
+              <a href="<%- config.root %><%- post.path %>"><%- post.title %></a>
+            </p>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
   <% }) %>
-  <% if (page.posts.length){ %>
-    </div></section>
-  <% } %>
-<% } %>
-<% if (page.total > 1){ %>
-  <div id="page-nav">
-    <%- bs_paginator({
-      prev_text: '<i class="fa fa-chevron-left"></i> Prev',
-      next_text: 'Next <i class="fa fa-chevron-right"></i>'
-    }) %>
-  </div>
 <% } %>
