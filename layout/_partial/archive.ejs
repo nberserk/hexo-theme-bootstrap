@@ -1,12 +1,13 @@
-<div class="container">
-  <% var years = _.uniq(site.posts.sort('date', -1).map(p => p.date.year())) %>
-  <% years.forEach(function (year) { %>
-
-    <a href="<%= config.root + config.archive_dir + "/" + year %>" class="btn btn-default" >
-      <%= year %>
-    </a>
-
-  <% }); %>
+<div class="panel panel-default">
+    <div class="panel-heading">by Year</div>
+    <div class="panel-body">
+      <% var years = _.uniq(site.posts.sort('date', -1).map(p => p.date.year())) %>
+      <% years.forEach(function (year) { %>
+        <a href="<%= config.root + config.archive_dir + "/" + year %>" class="btn btn-default" >
+          <%= year %>
+        </a>
+      <% }); %>
+    </div>
 </div>
 
 <hr>

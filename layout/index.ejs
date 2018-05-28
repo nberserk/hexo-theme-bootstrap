@@ -1,1 +1,32 @@
-<%- partial('_partial/archive', {pagination: 2, index: true}) %>
+
+  <% page.posts.each(function(post) { %>
+    <article class="post">
+      <header class="post-header">
+        <span class="post-meta">
+          <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, null) %></time>
+          <% if (post.tags && post.tags.length){ %> on <% post.tags.forEach(function(tag) { %><a href="<%= config.root + tag.path %>"><%= tag.name %></a><% }); %><% } %>
+        </span>
+        <h1 class="post-title"><a href="<%- config.root %><%- post.path %>"><%- post.title %></a></h1>
+      </header>
+      <section class="post-excerpt">
+        <p>
+          <% if (post.excerpt){ %>
+            <%- post.excerpt %>
+          <% } else { %>
+            <%- post.content.replace(/<(?:.|\n)*?>/gm, '').substr(0, 220) %>
+          <% } %>
+        </p>
+        <% if (theme.excerpt_link) { %>
+          <p>
+            <a href="<%- config.root %><%- post.path %>" class="excerpt-link"><%= theme.excerpt_link %>...</a>
+          </p>
+        <% } %>
+      </section>
+    </article>
+  <% }); %>
+  <%- bs_paginator({
+      prev_text: '<i class="fa fa-chevron-left"></i> Prev',
+      next_text: 'Next <i class="fa fa-chevron-right"></i>'
+    }) %>
+
+
