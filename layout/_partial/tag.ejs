@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+      <% site.tags.sort('name').each(function(item){ %>
+        <a class="btn btn-default" href="<%= config.root + item.path %>"><%= item.name %><sup><%= item.posts.length %></sup></a>
+      <% }); %>
+    </div>
+</div>
+
+<ul>
+<% site.posts.sort('date', -1).each(function(post) { %>
+    <% var year = post.date.year(); %>
+    <% var tags = post.tags.map(function (t) { return t.name; }); %>
+    <% if (tags.indexOf(page.tag) < 0) return; %>
+    <li class="listing-item">
+    <p class="post-title">
+        <small class="post-meta">
+        <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, null) %></time>
+        </small>
+        <a href="<%- config.root %><%- post.path %>"><%- post.title %></a>
+    </p>
+    </li>
+    <% }); %>
+</ul>

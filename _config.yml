@@ -1,10 +1,7 @@
 # Header
 brand: "@nberserk's log"
 
-menu:
-  Home: index.html
-  Archives: archives/
-  Tags: tags/
+
 rss: /atom.xml
 
 # Content
@@ -14,7 +11,6 @@ fancybox: false
 # Sidebar
 widgets:
 - about         # See also: `about_content`
-- category
 - tagcloud
 - archive
 - recent_posts
