@@ -5,28 +5,31 @@
   <div class="panel panel-default">
       <div class="panel-body">
         <% site.tags.sort('name').each(function(item){ %>
-          <a class="btn btn-default" href="<%= config.root + item.path %>"><%= item.name %><sup><%= item.posts.length %></sup></a>
+          <a class="post-tag" href="<%= config.root + item.path %>"><%= item.name %><sup><%= item.posts.length %></sup></a>
         <% }); %>
       </div>
   </div>
   <hr>
-  <div class="archive">
+  <div >
     <% site.tags.sort('name').each(function(item){ %>
-      <a class="btn btn-default" data-toggle="collapse" id="<%= item.name %>" data-target="#modal-<%= item.name %>"> <%= item.name %> <b class="caret"></b></a>
-      <ul id="modal-<%= item.name %>" class="collapse in">
-        <% site.posts.sort('date', -1).forEach(function(it){ %>
-          <% if (it.tags.data.map(function (e) { return e.name;; }).indexOf(item.name) > -1){ %>
-            <li class="listing-item">
-              <p class="post-title">
-                <small class="post-meta">
-                  <time datetime="<%= date_xml(it.date) %>" itemprop="datePublished"><%= date(it.date, null) %></time>
-                </small>
-                <a href="<%= config.root %><%= it.path %>" <% if (it.description) { %> title="<%= it.description %>" <% } %>><%= it.title %></a>
-              </p>
-            </li>
-          <% } %>
-        <% }); %>
-      </ul>
+      <div>
+        <a class="post-tag" data-toggle="collapse" id="<%= item.name %>" data-target="#modal-<%= item.name %>"> <%= item.name %> <b class="caret"></b></a>
+        <ul id="modal-<%= item.name %>" class="collapse in">
+          <% site.posts.sort('date', -1).forEach(function(it){ %>
+            <% if (it.tags.data.map(function (e) { return e.name;; }).indexOf(item.name) > -1){ %>
+              <li class="listing-item">
+                <p class="post-title">
+                  <small class="post-meta">
+                    <time datetime="<%= date_xml(it.date) %>" itemprop="datePublished"><%= date(it.date, null) %></time>
+                  </small>
+                  <a href="<%= config.root %><%= it.path %>" <% if (it.description) { %> title="<%= it.description %>" <% } %>><%= it.title %></a>
+                </p>
+              </li>
+            <% } %>
+          <% }); %>
+        </ul>
+      </div>
+
     <% }); %>
   </div>
 <% } %>

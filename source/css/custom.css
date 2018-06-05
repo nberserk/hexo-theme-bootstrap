@@ -313,3 +313,25 @@ code {
 .paginator {
   text-align: center;
 }
+
+.post-tag{
+  display: inline-block;
+  font-size: 14px;
+  color: #39739d;
+  background-color: #E1ECF4;
+  border-color: transparent;
+  text-align: center;
+  margin: 5px 2px 5px 0;
+  padding: .4em .4em;
+  transition: all .15s ease-in-out;
+}
+
+.post-tag:hover{
+  color: #33658a;
+  background-color: #cee0ed;
+  border-color: rgba(0,0,0,0);
+}
+
+.text-muted {
+  color: #6c757d!important;
+}

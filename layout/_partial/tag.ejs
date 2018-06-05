@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
       <% site.tags.sort('name').each(function(item){ %>
-        <a class="btn btn-default" href="<%= config.root + item.path %>"><%= item.name %><sup><%= item.posts.length %></sup></a>
+        <a class="post-tag" href="<%= config.root + item.path %>"><%= item.name %><sup><%= item.posts.length %></sup></a>
       <% }); %>
     </div>
 </div>
