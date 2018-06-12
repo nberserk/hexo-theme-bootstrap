@@ -11,8 +11,7 @@
 /* Globals */
 
 /* body {
-  font-family: Georgia, "Times New Roman", Times, serif;
-  color: #555;
+  font-family: 'Nanum Gothic', sans-serif;
 } */
 
 h1, .h1,
@@ -152,7 +151,7 @@ code {
  */
 
 .blog-main {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
 }
 .blog-main > article:last-of-type {
