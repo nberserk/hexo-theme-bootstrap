@@ -1,55 +1,64 @@
-<div class="panel panel-default">
-    <div class="panel-heading">by Year</div>
-    <div class="panel-body">
-      <% var years = _.uniq(site.posts.sort('date', -1).map(p => p.date.year())) %>
-      <% years.forEach(function (year) { %>
-        <a href="<%= config.root + config.archive_dir + "/" + year %>" class="btn btn-default" >
-          <%= year %>
-        </a>
+<div>
+
+
+  <% var years = _.uniq(site.posts.sort('date', -1).map(p => p.date.year())) %>
+    <% years.forEach(function (year) { %>
+      <a href="<%= config.root + config.archive_dir + '/' + year %>" class="btn btn-primary">
+        <%= year %>
+      </a>
       <% }); %>
-    </div>
+
 </div>
 
-<hr>
+<hr/>
 
 <% var archives = site.posts.reduce((acc, p) => { %>
   <% var year = p.date.year() %>
-  <% if (!acc[year]) acc[year] = [p]; else acc[year].push(p); %>
-  <% return acc; %>
-<% }, {}) %>
+    <% if (!acc[year]) acc[year] = [p]; else acc[year].push(p); %>
+      <% return acc; %>
+        <% }, {}) %>
 
-<% if (page.year) { %>
-  <ul>
-    <% archives[page.year].sort((a,b) => b.date - a.date).forEach(post => { %>
-      <li class="listing-item">
-        <p class="post-title">
-          <small class="post-meta">
-            <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, null) %></time>
-          </small>
-          <a href="<%- config.root %><%- post.path %>"><%- post.title %></a>
-        </p>
-      </li>
-    <% }) %>
-  </ul>
-<% } else { %>
-  <% Object.keys(archives).sort((a,b) => b - a).forEach(year => { %>
+          <% if (page.year) { %>
+            <ul>
+              <% archives[page.year].sort((a,b) => b.date - a.date).forEach(post => { %>
+                <li class="listing-item">
+                  <p class="post-title">
+                    <small class="post-meta">
+                      <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished">
+                        <%= date(post.date, null) %>
+                      </time>
+                    </small>
+                    <a href="<%- config.root %><%- post.path %>">
+                      <%- post.title %>
+                    </a>
+                  </p>
+                </li>
+                <% }) %>
+            </ul>
+            <% } else { %>
+              <% Object.keys(archives).sort((a,b) => b - a).forEach(year => { %>
 
-    <div class="container">
-      <a class="btn btn-default" data-toggle="collapse" data-target="#<%= year %>">
-        <%= year %>&nbsp; <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
-      <ul id="<%= year %>" class="in">
-        <% archives[year].sort((a,b) => b.date - a.date).forEach(post => { %>
-          <li class="listing-item">
-            <p class="post-title">
-              <small class="post-meta">
-                <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, null) %></time>
-              </small>
-              <a href="<%- config.root %><%- post.path %>"><%- post.title %></a>
-            </p>
-          </li>
-        <% }) %>
-      </ul>
-    </div>
-  <% }) %>
-<% } %>
+                <div class="container">
+                  <a class="btn btn-info" data-toggle="collapse" href="#<%= year %>">
+                    <%= year %>
+                      <i class="fa fa-caret-down" aria-hidden="true"></i>
+                  </a>
+                  <ul id="<%= year %>" class="collapse show">
+                    <% archives[year].sort((a,b) => b.date - a.date).forEach(post => { %>
+                      <li class="listing-item">
+                        <p class="post-title">
+                          <small class="post-meta">
+                            <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished">
+                              <%= date(post.date, null) %>
+                            </time>
+                          </small>
+                          <a href="<%- config.root %><%- post.path %>">
+                            <%- post.title %>
+                          </a>
+                        </p>
+                      </li>
+                      <% }) %>
+                  </ul>
+                </div>
+                <% }) %>
+                  <% } %>

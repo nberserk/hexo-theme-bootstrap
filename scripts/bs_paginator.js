@@ -114,7 +114,7 @@ function bsPaginatorHelper(options) {
     }
   }
 
-  return '<nav class="paginator" ><ul class="pagination">' + result + '</ul></nav>';
+  return '<nav class="paginator" ><ul class="pagination justify-content-center">' + result + '</ul></nav>';
 }
 
 hexo.extend.helper.register('bs_paginator', bsPaginatorHelper);
