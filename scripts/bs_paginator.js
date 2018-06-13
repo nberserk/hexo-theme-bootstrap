@@ -1,6 +1,6 @@
 'use strict';
 
-function bsPaginatorHelper(options){
+function bsPaginatorHelper(options) {
   /* jshint validthis: true */
   options = options || {};
 
@@ -21,33 +21,33 @@ function bsPaginatorHelper(options){
 
   if (!current) return '';
 
-  var currentPage = '<li class="active"><span class="page-number">' +
+  var currentPage = '<li class="active page-item"><span class="page-link">' +
     (transform ? transform(current) : current) +
     '</span></li>';
 
-  function link(i){
+  function link(i) {
     return self.url_for(i === 1 ? base : base + format.replace('%d', i));
   }
 
-  function pageLink(i){
-    return '<li><a class="page-number" href="' + link(i) + '">' +
+  function pageLink(i) {
+    return '<li class="page-item" ><a class="page-link" href="' + link(i) + '">' +
       (transform ? transform(i) : i) +
       '</a></li>';
   }
 
   // Display the link to the previous page
-  if (prevNext){
+  if (prevNext) {
     if (current > 1) {
-      result += '<li><a class="page-prev" rel="prev" ' +
-              'href="' + link(current - 1) + '">' + prevText + '</a></li>';
+      result += '<li class="page-item" ><a class="page-link" rel="prev" ' +
+        'href="' + link(current - 1) + '">' + prevText + '</a></li>';
     } else {
-      result += '<li class="disabled"><span class="page-prev">' + prevText + '</a></li>';
+      result += '<li class="page-item disabled"><span class="page-link">' + prevText + '</a></li>';
     }
   }
 
-  if (options.show_all){
+  if (options.show_all) {
     // Display pages on the left side of the current page
-    for (i = 1; i < current; i++){
+    for (i = 1; i < current; i++) {
       result += pageLink(i);
     }
 
@@ -55,7 +55,7 @@ function bsPaginatorHelper(options){
     result += currentPage;
 
     // Display pages on the right side of the current page
-    for (i = current + 1; i <= total; i++){
+    for (i = current + 1; i <= total; i++) {
       result += pageLink(i);
     }
   } else {
@@ -64,21 +64,21 @@ function bsPaginatorHelper(options){
     var rightEnd = total - current <= endSize ? current + 1 : total - endSize + 1;
     var leftMid = current - midSize <= endSize ? current - midSize + endSize : current - midSize;
     var rightMid = current + midSize + endSize > total ? current + midSize - endSize : current + midSize;
-    var spaceHtml = '<li class="disabled"><span class="page-space">' + space + '</span></li>';
+    var spaceHtml = '<li class="page-item disabled"><span class="page-link">' + space + '</span></li>';
 
     // Display pages on the left edge
-    for (i = 1; i <= leftEnd; i++){
+    for (i = 1; i <= leftEnd; i++) {
       result += pageLink(i);
     }
 
     // Display spaces between edges and middle pages
-    if (space && current - endSize - midSize > 1){
+    if (space && current - endSize - midSize > 1) {
       result += spaceHtml;
     }
 
     // Display left middle pages
-    if (leftMid > leftEnd){
-      for (i = leftMid; i < current; i++){
+    if (leftMid > leftEnd) {
+      for (i = leftMid; i < current; i++) {
         result += pageLink(i);
       }
     }
@@ -87,30 +87,30 @@ function bsPaginatorHelper(options){
     result += currentPage;
 
     // Display right middle pages
-    if (rightMid < rightEnd){
-      for (i = current + 1; i <= rightMid; i++){
+    if (rightMid < rightEnd) {
+      for (i = current + 1; i <= rightMid; i++) {
         result += pageLink(i);
       }
     }
 
     // Display spaces between edges and middle pages
-    if (space && total - endSize - midSize > current){
+    if (space && total - endSize - midSize > current) {
       result += spaceHtml;
     }
 
     // Dispaly pages on the right edge
-    for (i = rightEnd; i <= total; i++){
+    for (i = rightEnd; i <= total; i++) {
       result += pageLink(i);
     }
   }
 
   // Display the link to the next page
-  if (prevNext){
+  if (prevNext) {
     if (current < total) {
-      result += '<li><a class="page-next" rel="next" ' +
-              'href="' + link(current + 1) + '">' + nextText + '</a></li>';
+      result += '<li class="page-item" ><a class="page-link" rel="next" ' +
+        'href="' + link(current + 1) + '">' + nextText + '</a></li>';
     } else {
-      result += '<li class="disabled"><span class="page-next">' + nextText + '</a></li>';
+      result += '<li class="page-item disabled"><span class="page-link">' + nextText + '</a></li>';
     }
   }
 

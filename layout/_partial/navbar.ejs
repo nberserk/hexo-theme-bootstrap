@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <% if (theme.navbar_brand){ %>
+        <a class="navbar-brand" href="<%- config.root %>">
+          <%- theme.navbar_brand %>
+        </a>
+        <% } %>
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <% for (var i in theme.menu){ %>
+              <li class="nav-item <%= is_current(theme.menu[i]) ? 'active' : '' %>">
+                <a class="nav-link " href="<%- url_for(theme.menu[i]) %>">
+                  <%= i %>
+                </a>
+              </li>
+              <% } %>
+          </ul>
+          <% if (theme.rss){ %>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li>
+                <a class="nav-link" href="<%- theme.rss %>" title="RSS Feed">
+                  <i class="fa fa-rss"></i>
+                </a>
+              </li>
+            </ul>
+            <% } %>
+              <form action="//google.com/search" class="form-inline my-2 my-lg-0">
+                <div class="form-group">
+                  <input type="search" name="q" class="form-control" placeholder="Search">
+                  <input type="hidden" name="sitesearch" value="http://nberserk.github.io">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </div>
+
+
+              </form>
+    </div>
+  </div>
+</nav>

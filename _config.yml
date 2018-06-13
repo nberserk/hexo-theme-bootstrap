@@ -15,7 +15,9 @@ widgets:
 - archive
 - recent_posts
 about_widget_content: >
-  <p>to be filled later </p>
+  <a href="https://twitter.com/darrenha?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @darrenha</a>
+  <a class="github-button" href="https://github.com/nberserk" data-show-count="true" aria-label="Follow @nberserk on GitHub">Follow @nberserk</a>
+  <hr/>
 
 # widget behavior
 archive_type: 'monthly'
