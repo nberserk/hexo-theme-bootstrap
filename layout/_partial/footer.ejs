@@ -1,8 +1,16 @@
 <footer class="blog-footer">
   <div class="container">
-    <div id="footer-info" class="inner">
-      &copy; 2008-<%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>  and <a href="https://github.com/nberserk/hexo-theme-bootstrap">hexo bootstrap theme</a>
+    <div id="footer-info" class="inner">      
+      &copy; 2008-<%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
+      <a href="https://twitter.com/darrenha?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @darrenha</a>
+      <a class="github-button" href="https://github.com/nberserk" data-show-count="true" aria-label="Follow @nberserk on GitHub">Follow @nberserk</a>
+      <br>      
     </div>    
+    <div>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>  and <a href="https://github.com/nberserk/hexo-theme-bootstrap">hexo bootstrap theme</a>
+    </div>
   </div>
 </footer>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
