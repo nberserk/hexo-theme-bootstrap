@@ -145,6 +145,12 @@ code {
   margin-bottom: 30px;
 }
 
+.blog-main blockquote{
+      border-left: 4px solid #DDD;
+    padding: 0 15px;
+    color: #777;
+}
+
 /* Sidebar modules for boxing content */
 .sidebar-module {
   padding: 15px;
